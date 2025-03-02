@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - No Contact Streak</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #111;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.7);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            color: #f39c12;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #ff6347;
+            color: white;
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s ease;
+            font-weight: 500;
+        }
+        .button:hover {
+            background-color: #e74c3c;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>No Contact Streak Login</h1>
+        <button class="button" onclick="login('carolyn')">Login as Carolyn</button>
+        <button class="button" onclick="login('cynthia')">Login as Cynthia</button>
+    </div>
+
+    <script>
+        function login(username) {
+            // Store the logged-in user's username in localStorage
+            localStorage.setItem("username", username);
+            // Redirect to the streak tracking page
+            window.location.href = "streak.html";
+        }
+    </script>
+
+</body>
+</html>
