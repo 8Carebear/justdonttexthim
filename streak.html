@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Contact Streak - Compete Against Each Other</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #222;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px red;
+        }
+        h1 {
+            font-size: 32px;
+            color: #ff5555;
+        }
+        .streak {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: yellow;
+            text-shadow: 2px 2px red;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: red;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+        .button:hover {
+            background-color: darkred;
+        }
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .streak-container {
+            margin: 30px 0;
+        }
+        #warning {
+            font-size: 16px;
+            margin-top: 20px;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>No Contact Streak</h1>
+
+        <div class="streak-container">
+            <div class="name">Carolyn's Streak</div>
+            <div id="carolyn-streak" class="streak">0 Days</div>
+            <button class="button" onclick="increaseStreak('carolyn')">I Survived Another Day</button>
+            <button class="button" onclick="resetStreak('carolyn')">I Messed Up...</button>
+        </div>
+
+        <div class="streak-container">
+            <div class="name">Cynthia's Streak</div>
+            <div id="cynthia-streak" class="streak">0 Days</div>
+            <button class="button" onclick="increaseStreak('cynthia')">I Survived Another Day</button>
+            <button class="button" onclick="resetStreak('cynthia')">I Messed Up...</button>
+        </div>
+
+        <p id="warning"></p>
+    </div>
+
+    <script>
+        let carolynStreak = localStorage.getItem("carolynStreak") || 0;
+        let cynthiaStreak = localStorage.getItem("cynthiaStreak") || 0;
+
+        document.getElementById("carolyn-streak").innerText = carolynStreak + " Days";
+        document.getElementById("cynthia-streak").innerText = cynthiaStreak + " Days";
+
+        function increaseStreak(person) {
+            if (person === "carolyn") {
+                carolynStreak++;
+                localStorage.setItem("carolynStreak", carolynStreak);
+                document.getElementById("carolyn-streak").innerText = carolynStreak + " Days";
+            } else if (person === "cynthia") {
+                cynthiaStreak++;
+                localStorage.setItem("cynthiaStreak", cynthiaStreak);
+                document.getElementById("cynthia-streak").innerText = cynthiaStreak + " Days";
+            }
+            document.getElementById("warning").innerText = "";
+        }
+
+        function resetStreak(person) {
+            if (person === "carolyn") {
+                let confirmReset = confirm("Are you sure, Carolyn? Cynthia will be laughing at you...");
+                if (confirmReset) {
+                    carolynStreak = 0;
+                    localStorage.setItem("carolynStreak", carolynStreak);
+                    document.getElementById("carolyn-streak").innerText = "0 Days";
+                    document.getElementById("warning").innerText = "💀 Cynthia is laughing at you!";
+                }
+            } else if (person === "cynthia") {
+                let confirmReset = confirm("Are you sure, Cynthia? Carolyn is going to laugh at you...");
+                if (confirmReset) {
+                    cynthiaStreak = 0;
+                    localStorage.setItem("cynthiaStreak", cynthiaStreak);
+                    document.getElementById("cynthia-streak").innerText = "0 Days";
+                    document.getElementById("warning").innerText = "💀 Carolyn is laughing at you!";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
